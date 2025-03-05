@@ -6,9 +6,10 @@
 const BASE_URL = 'https://startling-tanuki-ea7c77.netlify.app/';
 
 
-import * as esptooljs from "./node_modules/esptool-js/bundle.js";
-import * as toml from './node_modules/smol-toml/dist/index.js';
-
+// import * as esptooljs from "./node_modules/esptool-js/bundle.js";
+// import * as toml from './node_modules/smol-toml/dist/index.js';
+import * as esptooljs from "https://cdn.jsdelivr.net/npm/esptool-js@8.0.0/bundle.js";
+import * as toml from "https://cdn.jsdelivr.net/npm/smol-toml@0.0.11/dist/index.js";
 const ESPLoader = esptooljs.ESPLoader;
 const Transport = esptooljs.Transport;
 
