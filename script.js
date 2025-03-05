@@ -9,6 +9,8 @@ const BASE_URL = 'https://startling-tanuki-ea7c77.netlify.app/';
 import * as esptooljs from "./node_modules/esptool-js/bundle.js";
 import * as toml from './node_modules/smol-toml/dist/index.js';
 
+const ESPLoader = esptooljs.ESPLoader;
+const Transport = esptooljs.Transport;
 
 
 let port;
@@ -548,22 +550,75 @@ document.getElementById("sendSelectedFile").addEventListener("click", async func
 
 });
 
+
+let connected = false;
+let device = null;
+let transport = undefined;
+
+export const usbPortFilters = [
+  { usbVendorId: 0x10c4, usbProductId: 0xea60 }, /* CP2102/CP2102N */
+  { usbVendorId: 0x0403, usbProductId: 0x6010 }, /* FT2232H */
+  { usbVendorId: 0x303a, usbProductId: 0x1001 }, /* Espressif USB_SERIAL_JTAG */
+  { usbVendorId: 0x303a, usbProductId: 0x1002 }, /* Espressif esp-usb-bridge firmware */
+  { usbVendorId: 0x303a, usbProductId: 0x0002 }, /* ESP32-S2 USB_CDC */
+  { usbVendorId: 0x303a, usbProductId: 0x0009 }, /* ESP32-S3 USB_CDC */
+  { usbVendorId: 0x1a86, usbProductId: 0x55d4 }, /* CH9102F */
+  { usbVendorId: 0x1a86, usbProductId: 0x7523 }, /* CH340T */
+  { usbVendorId: 0x0403, usbProductId: 0x6001 }, /* FT232R */
+];
+
+async function connectToDevice() {
+  if (device === null) {
+      device = await navigator.serial.requestPort({
+          filters: usbPortFilters
+      });
+      transport = new Transport(device);
+  }
+
+  try {
+    console.log(`연결 완료`);
+      // const loaderOptions = {
+      //     transport,
+      //     baudrate: parseInt(flashingBaudrateSelect.value),
+      //     terminal: espLoaderTerminal
+      // };
+      // esploader = new ESPLoader(loaderOptions);
+      // connected = true;
+      // chipDesc = await esploader.main();
+      // chip = esploader.chip.CHIP_NAME;
+
+      // await esploader.flashId();
+      
+  } catch(e) 
+  {
+    console.log(`연결 에러`);
+  }
+
+}
+
 document.getElementById('versionBtn').addEventListener('click', async () => {
   
-    await uploader.connect();
-    version_main = await uploader.getVersion(0);
-    await new Promise(resolve => setTimeout(resolve, SEND_TERM));
+  if(!connected)
+    await connectToDevice();
 
-    version_hw = await uploader.getVersion(1);
-    await new Promise(resolve => setTimeout(resolve, SEND_TERM));
+//postConnectControls();
 
-    version_sd = await uploader.getVersion(2);
-    await new Promise(resolve => setTimeout(resolve, SEND_TERM));
 
-    document.getElementById('versionDisplay').textContent 
-    = `펌웨어 버전: main: ${version_main} HW:${version_hw} SD:${version_sd}`;
 
-    await uploader.disconnect()
+    // await uploader.connect();
+    // version_main = await uploader.getVersion(0);
+    // await new Promise(resolve => setTimeout(resolve, SEND_TERM));
+
+    // version_hw = await uploader.getVersion(1);
+    // await new Promise(resolve => setTimeout(resolve, SEND_TERM));
+
+    // version_sd = await uploader.getVersion(2);
+    // await new Promise(resolve => setTimeout(resolve, SEND_TERM));
+
+    // document.getElementById('versionDisplay').textContent 
+    // = `펌웨어 버전: main: ${version_main} HW:${version_hw} SD:${version_sd}`;
+
+    // await uploader.disconnect()
 
 
 

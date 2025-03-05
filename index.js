@@ -41,11 +41,6 @@ const developKitsContainer = document.getElementById("developKitsContainer");
 const appInfoTriggerContainer = document.getElementById("appInfoTriggerContainer");
 const rightOffCanvasContainer = document.getElementById("offcanvasRight");
 
-import * as esptooljs from "./node_modules/esptool-js/bundle.js";
-import * as toml from './node_modules/smol-toml/dist/index.js';
-
-
-
 let resizeTimeout = false;
 
 import * as utilities from "./utils.js";
