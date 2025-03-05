@@ -585,17 +585,17 @@ async function connectToDevice() {
 
   try {
     console.log(`연결 완료`);
-      const loaderOptions = {
-          transport,
-          baudrate: 921600,
-         // terminal: espLoaderTerminal
-      };
-      esploader = new ESPLoader(loaderOptions);
-      connected = true;
-      chipDesc = await esploader.main();
-      chip = esploader.chip.CHIP_NAME;
+      // const loaderOptions = {
+      //     transport,
+      //     baudrate: 921600,
+      //    // terminal: espLoaderTerminal
+      // };
+      // esploader = new ESPLoader(loaderOptions);
+      // connected = true;
+      // chipDesc = await esploader.main();
+      // chip = esploader.chip.CHIP_NAME;
 
-      await esploader.flashId();
+      // await esploader.flashId();
       
   } catch(e) 
   {
