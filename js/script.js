@@ -567,6 +567,10 @@ export const usbPortFilters = [
   { usbVendorId: 0x0403, usbProductId: 0x6001 }, /* FT232R */
 ];
 
+
+
+
+
 async function connectToDevice() {
   if (device === null) {
       device = await navigator.serial.requestPort({
@@ -579,8 +583,8 @@ async function connectToDevice() {
     console.log(`연결 완료`);
       const loaderOptions = {
           transport,
-          baudrate: parseInt(flashingBaudrateSelect.value),
-          terminal: espLoaderTerminal
+          baudrate: 921600,
+         // terminal: espLoaderTerminal
       };
       esploader = new ESPLoader(loaderOptions);
       connected = true;
