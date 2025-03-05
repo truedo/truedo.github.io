@@ -568,38 +568,38 @@ export const usbPortFilters = [
 ];
 
 async function connectToDevice() {
-  // if (device === null) {
-  //     device = await navigator.serial.requestPort({
-  //         filters: usbPortFilters
-  //     });
-  //     transport = new Transport(device);
-  // }
+  if (device === null) {
+      device = await navigator.serial.requestPort({
+          filters: usbPortFilters
+      });
+      transport = new Transport(device);
+  }
 
-  // try {
-  //   console.log(`연결 완료`);
-  //     // const loaderOptions = {
-  //     //     transport,
-  //     //     baudrate: parseInt(flashingBaudrateSelect.value),
-  //     //     terminal: espLoaderTerminal
-  //     // };
-  //     // esploader = new ESPLoader(loaderOptions);
-  //     // connected = true;
-  //     // chipDesc = await esploader.main();
-  //     // chip = esploader.chip.CHIP_NAME;
+  try {
+    console.log(`연결 완료`);
+      const loaderOptions = {
+          transport,
+          baudrate: parseInt(flashingBaudrateSelect.value),
+          terminal: espLoaderTerminal
+      };
+      esploader = new ESPLoader(loaderOptions);
+      connected = true;
+      chipDesc = await esploader.main();
+      chip = esploader.chip.CHIP_NAME;
 
-  //     // await esploader.flashId();
+      await esploader.flashId();
       
-  // } catch(e) 
-  // {
-  //   console.log(`연결 에러`);
-  // }
+  } catch(e) 
+  {
+    console.log(`연결 에러`);
+  }
 
 }
 
 document.getElementById('versionBtn').addEventListener('click', async () => {
   
-  // if(!connected)
-  //   await connectToDevice();
+  if(!connected)
+    await connectToDevice();
 
 //postConnectControls();
 
