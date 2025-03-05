@@ -559,7 +559,7 @@ let connected = false;
 let device = null;
 let transport = undefined;
 
-export const usbPortFilters = [
+const usbPortFilters = [
   { usbVendorId: 0x10c4, usbProductId: 0xea60 }, /* CP2102/CP2102N */
   { usbVendorId: 0x0403, usbProductId: 0x6010 }, /* FT2232H */
   { usbVendorId: 0x303a, usbProductId: 0x1001 }, /* Espressif USB_SERIAL_JTAG */
