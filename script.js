@@ -5,6 +5,12 @@
 
 const BASE_URL = 'https://startling-tanuki-ea7c77.netlify.app/';
 
+
+import * as esptooljs from "./node_modules/esptool-js/bundle.js";
+import * as toml from './node_modules/smol-toml/dist/index.js';
+
+
+
 let port;
 let writer;
 let reader;
